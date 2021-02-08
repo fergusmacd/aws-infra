@@ -7,16 +7,16 @@ network_defaults = {
     "10.14.1.128/26",
   "10.14.1.192/26"]
   subnet_public_azs = [
-    "ap-northeast-1b",
-    "ap-northeast-1c",
-  "ap-northeast-1d"]
+    "us-west-2a",
+    "us-west-2b",
+  "us-west-2c"]
 
   subnet_private_cidrs = [
     "10.14.0.64/26",
     "10.14.0.128/26",
   "10.14.0.192/26"]
   subnet_private_azs = [
-    "ap-northeast-1b",
-    "ap-northeast-1c",
-  "ap-northeast-1d"]
+    "us-west-2a",
+    "us-west-2b",
+  "us-west-2c"]
 }
