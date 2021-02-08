@@ -9,4 +9,3 @@ resource "aws_vpc" "default" {
     Region      = var.region
   }
 }
-
