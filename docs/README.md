@@ -1,6 +1,6 @@
 Build status badges
 
-# Project Title
+# AWS Infra
 
 Provide an introductory paragraph, describing:
 
