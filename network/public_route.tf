@@ -1,3 +1,4 @@
+## last viewed 9/2/2021
 ## Create a route to the internet
 resource "aws_route" "internet_access" {
   route_table_id         = aws_vpc.default.main_route_table_id
@@ -9,6 +10,12 @@ resource "aws_eip" "eip" {
   vpc        = true
   count      = length(var.network_defaults.subnet_private_cidrs)
   depends_on = [aws_internet_gateway.default]
+  tags = {
+    Name        = "${count.index} elastic IP for ${var.project_name}"
+    Project     = var.project_name
+    Environment = var.environment
+    Region      = var.region
+  }
 }
 
 resource "aws_nat_gateway" "nat" {
@@ -17,7 +24,7 @@ resource "aws_nat_gateway" "nat" {
   subnet_id     = element(aws_subnet.public_subnet.*.id, count.index)
 
   tags = {
-    Name        = "vpc management"
+    Name        = "${count.index} nat gateway for ${var.project_name}"
     Project     = var.project_name
     Environment = var.environment
     Region      = var.region
