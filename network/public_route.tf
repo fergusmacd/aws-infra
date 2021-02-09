@@ -6,31 +6,31 @@ resource "aws_route" "internet_access" {
   gateway_id             = aws_internet_gateway.default.id
 }
 
-resource "aws_eip" "eip" {
-  vpc        = true
-  count      = length(var.network_defaults.subnet_private_cidrs)
-  depends_on = [aws_internet_gateway.default]
-  tags = {
-    Name        = "${count.index} elastic IP for ${var.project_name}"
-    Project     = var.project_name
-    Environment = var.environment
-    Region      = var.region
-  }
-}
+//resource "aws_eip" "eip" {
+//  vpc        = true
+//  count      = length(var.network_defaults.subnet_private_cidrs)
+//  depends_on = [aws_internet_gateway.default]
+//  tags = {
+//    Name        = "${count.index} elastic IP for ${var.project_name}"
+//    Project     = var.project_name
+//    Environment = var.environment
+//    Region      = var.region
+//  }
+//}
 
-resource "aws_nat_gateway" "nat" {
-  count         = length(var.network_defaults.subnet_public_cidrs)
-  allocation_id = element(aws_eip.eip.*.id, count.index)
-  subnet_id     = element(aws_subnet.public_subnet.*.id, count.index)
-
-  tags = {
-    Name        = "${count.index} nat gateway for ${var.project_name}"
-    Project     = var.project_name
-    Environment = var.environment
-    Region      = var.region
-  }
-  depends_on = [aws_internet_gateway.default]
-}
+//resource "aws_nat_gateway" "nat" {
+//  count         = length(var.network_defaults.subnet_public_cidrs)
+//  allocation_id = element(aws_eip.eip.*.id, count.index)
+//  subnet_id     = element(aws_subnet.public_subnet.*.id, count.index)
+//
+//  tags = {
+//    Name        = "${count.index} nat gateway for ${var.project_name}"
+//    Project     = var.project_name
+//    Environment = var.environment
+//    Region      = var.region
+//  }
+//  depends_on = [aws_internet_gateway.default]
+//}
 
 # Associate public subnet to private route table
 resource "aws_route_table_association" "public" {
