@@ -1,3 +1,4 @@
+## last viewed 9/2/2021
 terraform {
   required_version = ">= 0.12"
   required_providers {
@@ -6,9 +7,4 @@ terraform {
       version = "~> 3.0"
     }
   }
-}
-
-# Configure the AWS Provider
-provider "aws" {
-  region = var.region
 }
